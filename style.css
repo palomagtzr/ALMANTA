@@ -122,3 +122,24 @@ body {
 html {
     scroll-behavior: smooth;
 }
+
+.dropdown-menu .dropdown-item {
+    color: #BBC893 !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #e0e6d1;
+    /* Ajusta esto si quieres un color de fondo en hover */
+    color: #606c38 !important;
+}
+
+/* Cambiar color del enlace en el texto "Don't have an account?" */
+.text-center a {
+    color: #BBC893 !important;
+    text-decoration: none;
+}
+
+.text-center a:hover {
+    color: #606c38 !important;
+    text-decoration: underline;
+}
