@@ -1,0 +1,103 @@
+:root {
+    --theme-color: #606c38;
+    --text-color: #343a40;
+    --bg-light: #f9f9f9;
+    --border-color: #dcdcdc;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-light);
+}
+
+.navbar,
+.footer {
+    background-color: var(--theme-color);
+}
+
+.footer p {
+    color: white;
+}
+
+.btn-custom,
+.btn-primary {
+    background-color: var(--theme-color);
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #55632f;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: var(--theme-color);
+}
+
+.card-text,
+.price,
+.total-price {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+:root {
+    --theme-color: #606c38;
+    --text-color: #343a40;
+    --bg-light: #f9f9f9;
+    --border-color: #dcdcdc;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-light);
+}
+
+.navbar,
+.footer {
+    background-color: var(--theme-color);
+}
+
+.hero-section {
+    background-image: url('cover-image.jpg');
+    /* Replace with your cover image file path */
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    color: white;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Dark overlay for text readability */
+    z-index: 1;
+}
+
+.hero-section .container {
+    z-index: 2;
+    position: relative;
+}
+
+.btn-custom,
+.btn-primary {
+    background-color: var(--theme-color);
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #55632f;
+}
