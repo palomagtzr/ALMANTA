@@ -22,20 +22,15 @@ body {
     padding-top: 0;
     padding-bottom: 0;
     height: 100px;
-    /* Adjust as needed */
 }
 
 /* Force Logo to Be Larger */
 .navbar .logo {
     max-height: 150px;
-    /* Set to desired logo size */
     height: auto;
-    /* Ensure aspect ratio is preserved */
     width: auto;
     padding: 0;
-    /* Remove any internal padding */
     margin: 0;
-    /* Remove any margin */
 }
 
 

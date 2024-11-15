@@ -17,6 +17,7 @@
             <a href="index.html" class="navbar-brand">
                 <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
             </a>
+            <a class="navbar-brand" href="index.html">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -30,20 +31,34 @@
             </div>
         </div>
     </nav>
+
+    <!-- Product Section -->
     <div class="container py-5">
         <div class="row">
+            <!-- Product Image -->
             <div class="col-md-6">
-                <img src="plant1.jpg" class="img-fluid" alt="Plant Image">
+                <img src="img/product_image.jpg" alt="Product Image" class="img-fluid">
             </div>
+            <!-- Product Details -->
             <div class="col-md-6">
-                <h3>Plant 1</h3>
-                <p>Description of the plant goes here. This could include care instructions, sunlight needs, and ideal
-                    placement.</p>
-                <p class="price">$15.00</p>
-                <button class="btn btn-custom">Add to Cart</button>
+                <h3 class="text-success">$180</h3>
+                <h1 class="mb-3">White Modern Chair</h1>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="me-2">★★★★★</span> <!-- Star rating -->
+                    <a href="#" class="ms-3 text-muted">Write A Review</a>
+                </div>
+                <p class="text-success mb-3">In Stock</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquid quae eveniet culpa officia quidem
+                    mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
+                <div class="d-flex align-items-center mb-3">
+                    <label for="quantity" class="me-3">Qty</label>
+                    <input type="number" id="quantity" class="form-control w-auto" value="1" min="1">
+                </div>
+                <button class="btn btn-custom btn-lg w-100">Add to cart</button>
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
