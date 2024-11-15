@@ -66,8 +66,7 @@ body {
 }
 
 .hero-section {
-    background-image: url('cover-image.jpg');
-    /* Replace with your cover image file path */
+    background-image: url('img/plantas_cover.jpg');
     background-size: cover;
     background-position: center;
     height: 80vh;
