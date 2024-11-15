@@ -14,30 +14,30 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
             </a>
-            <a class="navbar-brand" href="index.html">Menu</a>
+            <a class="navbar-brand" href="index.php">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
 
                     <!-- User Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle me-2"></i> <!-- User icon -->
-                            User
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="register.html">Register</a></li>
-                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="register.php">Register</a></li>
+                            <li><a class="dropdown-item" href="login.php">Login</a></li>
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
                     </li>
@@ -54,7 +54,7 @@
             <p class="lead">Discover our curated collection of various types of plants and some botanical treasures to
                 brighten up your
                 space.</p>
-            <a href="catalog.html" class="btn btn-custom btn-lg mt-3">Shop Now</a>
+            <a href="catalog.php" class="btn btn-custom btn-lg mt-3">Shop Now</a>
         </div>
     </header>
 
@@ -67,7 +67,7 @@
                     <img src="img/img_main/desierto.jpg" class="card-img-top" alt="Desert">
                     <div class="card-body">
                         <h5 class="card-title">DESERT PLANTS</h5>
-                        <a href="catalog.html#desert-plants" class="btn btn-custom">View Collection</a>
+                        <a href="catalog.php#desert-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     <img src="img/img_main/agua.jpg" class="card-img-top" alt="Ferns">
                     <div class="card-body">
                         <h5 class="card-title">WATER PLANTS</h5>
-                        <a href="catalog.html#water-plants" class="btn btn-custom">View Collection</a>
+                        <a href="catalog.php#water-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <img src="img/img_main/aromaticas.jpg" class="card-img-top" alt="Flowering Plants">
                     <div class="card-body">
                         <h5 class="card-title">AROMATIC PLANTS</h5>
-                        <a href="catalog.html#aromatic-plants" class="btn btn-custom">View Collection</a>
+                        <a href="catalog.php#aromatic-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                     <img src="img/img_main/casa.jpg" class="card-img-top" alt="Cacti">
                     <div class="card-body">
                         <h5 class="card-title">HOUSE PLANTS</h5>
-                        <a href="catalog.html#house-plants" class="btn btn-custom">View Collection</a>
+                        <a href="catalog.php#house-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                     <img src="img/img_main/sombra.jpg" class="card-img-top" alt="Indoor Plants">
                     <div class="card-body">
                         <h5 class="card-title">INDOOR PLANTS</h5>
-                        <a href="catalog.html#indoor-plants" class="btn btn-custom">View Collection</a>
+                        <a href="catalog.php#indoor-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                     <img src="img/img_main/medicinales.jpg" class="card-img-top" alt="Bonsai">
                     <div class="card-body">
                         <h5 class="card-title">MEDICINAL PLANTS</h5>
-                        <a href="catalog.html#medicinal-plants" class="btn btn-custom">View Collection</a>
+                        <a href="catalog.php#medicinal-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -154,13 +154,13 @@
         <div class="container">
             <h3>Ready to Green Up Your Space?</h3>
             <p>Join our community of plant lovers and bring home your first plant today!</p>
-            <a href="catalog.html" class="btn btn-custom btn-lg">Explore Our Collection</a>
+            <a href="catalog.php" class="btn btn-custom btn-lg">Explore Our Collection</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer py-4 text-center">
-        <p>&copy; 2024 Plant Shop. All rights reserved. | <a href="privacy.html" style="color: white;">Privacy
+        <p>&copy; 2024 Plant Shop. All rights reserved. | <a href="" style="color: white;">Privacy
                 Policy</a></p>
     </footer>
 

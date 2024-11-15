@@ -14,19 +14,20 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
             </a>
-            <a class="navbar-brand" href="index.html">Menu</a>
+            <a class="navbar-brand" href="index.php">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
 
                     <!-- User Dropdown -->
                     <li class="nav-item dropdown">
@@ -36,8 +37,8 @@
                             User
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="register.html">Register</a></li>
-                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="register.php">Register</a></li>
+                            <li><a class="dropdown-item" href="login.php">Login</a></li>
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
                     </li>
@@ -55,7 +56,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Aloe Vera</h5>
                         <p class="price">$150 MXN</p>
-                        <a href="product.html?id=aloe" class="btn btn-custom">View Details</a>
+                        <a href="product.php?id=aloe" class="btn btn-custom">View Details</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +66,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Cactus</h5>
                         <p class="price">$200 MXN</p>
-                        <a href="product.html?id=cactus" class="btn btn-custom">View Details</a>
+                        <a href="product.php?id=cactus" class="btn btn-custom">View Details</a>
                     </div>
                 </div>
             </div>
@@ -76,7 +77,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Euphorbia Trigona</h5>
                         <p class="price">$220 MXN</p>
-                        <a href="product.html?id=euphorbia" class="btn btn-custom">View Details</a>
+                        <a href="product.php?id=euphorbia" class="btn btn-custom">View Details</a>
                     </div>
                 </div>
             </div>
@@ -87,7 +88,7 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">Nopalitos</h5>
                             <p class="price">$120 MXN</p>
-                            <a href="product.html?id=nopalitos" class="btn btn-custom">View Details</a>
+                            <a href="product.php?id=nopalitos" class="btn btn-custom">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +98,7 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">Siempreviva de Palmer</h5>
                             <p class="price">$130 MXN</p>
-                            <a href="product.html?id=siempreviva" class="btn btn-custom">View Details</a>
+                            <a href="product.php?id=siempreviva" class="btn btn-custom">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -112,7 +113,7 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title">Anubias Barteri</h5>
                                 <p class="price">$90 MXN</p>
-                                <a href="product.html?id=anubias" class="btn btn-custom">View Details</a>
+                                <a href="product.php?id=anubias" class="btn btn-custom">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -122,7 +123,7 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title">Cabomba Caroliniana</h5>
                                 <p class="price">$70 MXN</p>
-                                <a href="product.html?id=cabomba" class="btn btn-custom">View Details</a>
+                                <a href="product.php?id=cabomba" class="btn btn-custom">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -132,7 +133,7 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title">Jacinto de Agua</h5>
                                 <p class="price">$100 MXN</p>
-                                <a href="product.html?id=jacinto" class="btn btn-custom">View Details</a>
+                                <a href="product.php?id=jacinto" class="btn btn-custom">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -143,7 +144,7 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Lirio de agua</h5>
                                     <p class="price">$90 MXN</p>
-                                    <a href="product.html?id=lirio" class="btn btn-custom">View Details</a>
+                                    <a href="product.php?id=lirio" class="btn btn-custom">View Details</a>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +154,7 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Musgo de Java</h5>
                                     <p class="price">$50 MXN</p>
-                                    <a href="product.html?id=musgo" class="btn btn-custom">View Details</a>
+                                    <a href="product.php?id=musgo" class="btn btn-custom">View Details</a>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +170,7 @@
                                     <div class="card-body text-center">
                                         <h5 class="card-title">Albahaca</h5>
                                         <p class="price">$70 MXN</p>
-                                        <a href="product.html?id=albahaca" class="btn btn-custom">View Details</a>
+                                        <a href="product.php?id=albahaca" class="btn btn-custom">View Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +181,7 @@
                                     <div class="card-body text-center">
                                         <h5 class="card-title">Hierbabuena</h5>
                                         <p class="price">$60 MXN</p>
-                                        <a href="product.html?id=hierbabuena" class="btn btn-custom">View Details</a>
+                                        <a href="product.php?id=hierbabuena" class="btn btn-custom">View Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +192,7 @@
                                     <div class="card-body text-center">
                                         <h5 class="card-title">Lavanda</h5>
                                         <p class="price">$100 MXN</p>
-                                        <a href="product.html?id=lavanda" class="btn btn-custom">View Details</a>
+                                        <a href="product.php?id=lavanda" class="btn btn-custom">View Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +204,7 @@
                                         <div class="card-body text-center">
                                             <h5 class="card-title">Romero</h5>
                                             <p class="price">$80 MXN</p>
-                                            <a href="product.html?id=romero" class="btn btn-custom">View Details</a>
+                                            <a href="product.php?id=romero" class="btn btn-custom">View Details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -214,7 +215,7 @@
                                         <div class="card-body text-center">
                                             <h5 class="card-title">Tomillo</h5>
                                             <p class="price">$75 MXN</p>
-                                            <a href="product.html?id=tomillo" class="btn btn-custom">View Details</a>
+                                            <a href="product.php?id=tomillo" class="btn btn-custom">View Details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -230,7 +231,7 @@
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Lengua de Suegra</h5>
                                                 <p class="price">$150 MXN</p>
-                                                <a href="product.html?id=lengua" class="btn btn-custom">View Details</a>
+                                                <a href="product.php?id=lengua" class="btn btn-custom">View Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -241,7 +242,7 @@
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Monstera Deliciosa</h5>
                                                 <p class="price">$400 MXN</p>
-                                                <a href="product.html?id=monstera" class="btn btn-custom">View
+                                                <a href="product.php?id=monstera" class="btn btn-custom">View
                                                     Details</a>
                                             </div>
                                         </div>
@@ -253,7 +254,7 @@
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">Palo de Brasil</h5>
                                                 <p class="price">$350 MXN</p>
-                                                <a href="product.html?id=paloBrasil" class="btn btn-custom">View
+                                                <a href="product.php?id=paloBrasil" class="btn btn-custom">View
                                                     Details</a>
                                             </div>
                                         </div>
@@ -266,7 +267,7 @@
                                                 <div class="card-body text-center">
                                                     <h5 class="card-title">Planta China del Dinero</h5>
                                                     <p class="price">$160 MXN</p>
-                                                    <a href="product.html?id=plantaChina" class="btn btn-custom">View
+                                                    <a href="product.php?id=plantaChina" class="btn btn-custom">View
                                                         Details</a>
                                                 </div>
                                             </div>
@@ -278,7 +279,7 @@
                                                 <div class="card-body text-center">
                                                     <h5 class="card-title">Zamioculcas Zamiifolia</h5>
                                                     <p class="price">$300 MXN</p>
-                                                    <a href="product.html?id=zamioculcas" class="btn btn-custom">View
+                                                    <a href="product.php?id=zamioculcas" class="btn btn-custom">View
                                                         Details</a>
                                                 </div>
                                             </div>
@@ -295,7 +296,7 @@
                                                     <div class="card-body text-center">
                                                         <h5 class="card-title">Aspidistra Elatior</h5>
                                                         <p class="price">$250 MXN</p>
-                                                        <a href="product.html?id=aspidistra" class="btn btn-custom">View
+                                                        <a href="product.php?id=aspidistra" class="btn btn-custom">View
                                                             Details</a>
                                                     </div>
                                                 </div>
@@ -307,7 +308,7 @@
                                                     <div class="card-body text-center">
                                                         <h5 class="card-title">Calathea Orbifolia</h5>
                                                         <p class="price">$280 MXN</p>
-                                                        <a href="product.html?id=calathea" class="btn btn-custom">View
+                                                        <a href="product.php?id=calathea" class="btn btn-custom">View
                                                             Details</a>
                                                     </div>
                                                 </div>
@@ -319,7 +320,7 @@
                                                     <div class="card-body text-center">
                                                         <h5 class="card-title">Dieffenbachia Seguine</h5>
                                                         <p class="price">$180 MXN</p>
-                                                        <a href="product.html?id=dieffenbachia"
+                                                        <a href="product.php?id=dieffenbachia"
                                                             class="btn btn-custom">View Details</a>
                                                     </div>
                                                 </div>
@@ -332,8 +333,7 @@
                                                         <div class="card-body text-center">
                                                             <h5 class="card-title">Helecho Boston</h5>
                                                             <p class="price">$130 MXN</p>
-                                                            <a href="product.html?id=helecho"
-                                                                class="btn btn-custom">View
+                                                            <a href="product.php?id=helecho" class="btn btn-custom">View
                                                                 Details</a>
                                                         </div>
                                                     </div>
@@ -345,7 +345,7 @@
                                                         <div class="card-body text-center">
                                                             <h5 class="card-title">Palma Kentia</h5>
                                                             <p class="price">$500 MXN</p>
-                                                            <a href="product.html?id=palmaKentia"
+                                                            <a href="product.php?id=palmaKentia"
                                                                 class="btn btn-custom">View
                                                                 Details</a>
                                                         </div>
@@ -363,7 +363,7 @@
                                                             <div class="card-body text-center">
                                                                 <h5 class="card-title">Ajenjo</h5>
                                                                 <p class="price">$85 MXN</p>
-                                                                <a href="product.html?id=ajenjo"
+                                                                <a href="product.php?id=ajenjo"
                                                                     class="btn btn-custom">View
                                                                     Details</a>
                                                             </div>
@@ -376,7 +376,7 @@
                                                             <div class="card-body text-center">
                                                                 <h5 class="card-title">Echinacea</h5>
                                                                 <p class="price">$90 MXN</p>
-                                                                <a href="product.html?id=echinacea"
+                                                                <a href="product.php?id=echinacea"
                                                                     class="btn btn-custom">View
                                                                     Details</a>
                                                             </div>
@@ -389,7 +389,7 @@
                                                             <div class="card-body text-center">
                                                                 <h5 class="card-title">Manzanilla</h5>
                                                                 <p class="price">$65 MXN</p>
-                                                                <a href="product.html?id=manzanilla"
+                                                                <a href="product.php?id=manzanilla"
                                                                     class="btn btn-custom">View
                                                                     Details</a>
                                                             </div>
@@ -403,7 +403,7 @@
                                                                 <div class="card-body text-center">
                                                                     <h5 class="card-title">Ortiga</h5>
                                                                     <p class="price">$70 MXN</p>
-                                                                    <a href="product.html?id=ortiga"
+                                                                    <a href="product.php?id=ortiga"
                                                                         class="btn btn-custom">View
                                                                         Details</a>
                                                                 </div>
@@ -416,7 +416,7 @@
                                                                 <div class="card-body text-center">
                                                                     <h5 class="card-title">Salvia</h5>
                                                                     <p class="price">$100 MXN</p>
-                                                                    <a href="product.html?id=salvia"
+                                                                    <a href="product.php?id=salvia"
                                                                         class="btn btn-custom">View
                                                                         Details</a>
                                                                 </div>

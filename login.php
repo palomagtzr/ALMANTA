@@ -1,29 +1,91 @@
-<?php
-session_start();
-include('conection.php'); // Incluye tu archivo de conexión a la base de datos
+<!DOCTYPE html>
+<html lang="en">
 
-// Obtener los datos del formulario de inicio de sesión
-$email = $_POST['correo'];
-$password = $_POST['contraseña'];
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ALMANTA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/img/ALMANTA_logo.png" type="image/png">
+</head>
 
-// Consulta para verificar el usuario
-$query = "SELECT * FROM usuarios WHERE correo = '$email'";
-$result = mysqli_query($con, $query);
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a href="index.php" class="navbar-brand">
+                <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
+            </a>
+            <a class="navbar-brand" href="index.php">Menu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
 
-if (mysqli_num_rows($result) == 1) {
-    $user = mysqli_fetch_assoc($result);
+                    <!-- User Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-2"></i> <!-- User icon -->
+                            User
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="register.php">Crear Usuario</a></li>
+                            <li><a class="dropdown-item" href="login.php">Iniciar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    // Verificar la contraseña
-    if (password_verify($password, $user['contraseña'])) {
-        // Guardar los datos del usuario en la sesión
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['nombre'];
-        header('Location: index.html'); // Redirige al usuario al dashboard u otra página
-        exit();
-    } else {
-        echo "Contraseña incorrecta";
-    }
-} else {
-    echo "Usuario no encontrado";
-}
-?>
+    <!-- Login Form -->
+    <div class="container py-5">
+        <h2 class="text-center mb-4">User Login</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form action="login-php.php" method="post">
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="correo" name="correo"
+                                    placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contraseña" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="contraseña" name="contraseña"
+                                    placeholder="Enter your password" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-custom">Login</button>
+                            </div>
+                        </form>
+                        <p class="text-center mt-3">
+                            Don't have an account? <a href="register.php" class="text-decoration-none"
+                                style="color: #BBC893;">Sign up
+                                here</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-4 text-center">
+        <p>&copy; 2024 ALMANTA. All rights reserved. | <a href="" style="color: white;">Privacy
+                Policy</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

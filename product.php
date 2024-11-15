@@ -14,19 +14,20 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
             </a>
-            <a class="navbar-brand" href="index.html">Menu</a>
+            <a class="navbar-brand" href="index.php">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
 
                     <!-- User Dropdown -->
                     <li class="nav-item dropdown">
@@ -36,8 +37,8 @@
                             User
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="register.html">Register</a></li>
-                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="register.php">Register</a></li>
+                            <li><a class="dropdown-item" href="login.php">Login</a></li>
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
                     </li>
