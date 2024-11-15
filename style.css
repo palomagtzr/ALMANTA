@@ -118,3 +118,7 @@ body {
 .btn-custom:hover {
     background-color: #55632f;
 }
+
+html {
+    scroll-behavior: smooth;
+}
