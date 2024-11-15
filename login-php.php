@@ -18,7 +18,7 @@ if (mysqli_num_rows($result) == 1) {
         // Guardar los datos del usuario en la sesión
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['nombre'];
-        header('Location: index.html'); // Redirige al usuario al dashboard u otra página
+        header('Location: index.php'); // Redirige al usuario al dashboard u otra página
         exit();
     } else {
         echo "Contraseña incorrecta";

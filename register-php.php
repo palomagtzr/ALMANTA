@@ -38,7 +38,7 @@ $action = "INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contraseña`, `fec
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
             <a href="index.php" class="navbar-brand">
-                <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="150">
+                <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
             </a>
             <a class="navbar-brand" href="index.php">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -50,15 +50,25 @@ $action = "INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contraseña`, `fec
                     <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+
+                    <!-- User Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="bi bi-person"></i> User
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-2"></i>
+                            <?php
+                            // Verifica si el usuario está en sesión y muestra su nombre
+                            echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User';
+                            ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="register.php">Register</a></li>
-                            <li><a class="dropdown-item" href="login.php">Login</a></li>
-                            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Log out</a></li>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="register.php">Register</a></li>
+                                <li><a class="dropdown-item" href="login.php">Log in</a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                 </ul>
