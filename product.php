@@ -56,19 +56,27 @@
     <!-- Product Section -->
     <div class="container py-5">
         <div class="row">
-            <!-- Product Image -->
+            <!-- Imagen del producto -->
             <div class="col-md-6">
                 <img src="img/product_image.jpg" alt="Product Image" class="img-fluid">
             </div>
             <div class="col-md-6">
-                <h3 class="text-success">$15.00</h3>
+                <!-- precio -->
+                <h3 class="text-secondary">$0 MXN</h3>
+                <!-- producto -->
                 <h1 class="mb-3">Nombre del Producto</h1>
                 <div class="d-flex align-items-center mb-3">
                     <span class="me-2">★★★★★</span>
                     <a href="#" class="ms-3 text-muted">Write A Review</a>
                 </div>
-                <p class="text-success mb-3">In Stock</p>
+                <!-- stock -->
+                <p class="text-secondary mb-3">In Stock</p>
+                <!-- descripción -->
                 <p class="description">Descripción del producto.</p>
+                <!-- origen -->
+                <p class="origen">Origen del producto.</p>
+                <!-- fabricante -->
+                <p class="fabricante">Fabricante del producto.</p>
                 <div class="d-flex align-items-center mb-3">
                     <label for="quantity" class="me-3">Qty</label>
                     <input type="number" id="quantity" class="form-control w-auto" value="1" min="1">
@@ -88,216 +96,279 @@
         // Datos de todas las plantas
         const products = {
             "aloe": {
-                "name": "Aloe Vera",
-                "price": "$150 MXN",
-                "image": "img/img_productos/Desierto/aloeVera.jpg",
-                "description": "Planta suculenta con hojas carnosas que se usa en tratamientos de piel por sus propiedades hidratantes y curativas.",
-                "stock": "In Stock"
+                "id": "",
+                "nombre": "Aloe Vera",
+                "precio": "$150 MXN",
+                "fotos": "img/img_productos/Desierto/aloeVera.jpg",
+                "descripcion": "Succulent plant with fleshy leaves, used in skin treatments for its hydrating and healing properties.",
+                "cantidad_almacen": 45,
+                "fabricante": "Vivero CactusLand",
+                "origen": "North Africa"
             },
             "cactus": {
-                "name": "Cactus",
-                "price": "$200 MXN",
-                "image": "img/img_productos/Desierto/cactus.jpg",
-                "description": "Cactus columnar resistente, ideal para exteriores, conocido por su rápido crecimiento.",
-                "stock": "In Stock"
+                "nombre": "Cactus",
+                "precio": "$200 MXN",
+                "fotos": "img/img_productos/Desierto/cactus.jpg",
+                "descripcion": "Resilient columnar cactus, ideal for outdoor use, known for its fast growth.",
+                "cantidad_almacen": 67,
+                "fabricante": "Jardines del Sol",
+                "origen": "Peru"
             },
             "euphorbia": {
-                "name": "Euphorbia Trigona",
-                "price": "$220 MXN",
-                "image": "img/img_productos/Desierto/Euphorbia_trigona.jpg",
-                "description": "Planta vertical con espinas decorativas, perfecta para dar un toque exótico.",
-                "stock": "In Stock"
+                "nombre": "Euphorbia Trigona",
+                "precio": "$220 MXN",
+                "fotos": "img/img_productos/Desierto/Euphorbia_trigona.jpg",
+                "descripcion": "Vertical plant with decorative spines, perfect for adding an exotic touch.",
+                "cantidad_almacen": 34,
+                "fabricante": "Cactáceas del Norte",
+                "origen": "Africa"
             },
             "nopalitos": {
-                "name": "Opuntia Microdasys (Nopalitos)",
-                "price": "$120 MXN",
-                "image": "img/img_productos/Desierto/nopalitos.jpeg",
-                "description": "Cactus de 'orejas' pequeñas con espinas diminutas, muy decorativo.",
-                "stock": "In Stock"
+                "nombre": "Opuntia Microdasys (Nopalitos)",
+                "precio": "$120 MXN",
+                "fotos": "img/img_productos/Desierto/nopalitos.jpeg",
+                "descripcion": "Cactus with small 'ears' and tiny spines, very decorative.",
+                "cantidad_almacen": 50,
+                "fabricante": "Cactus del Desierto",
+                "origen": "Mexico"
             },
             "siempreviva": {
-                "name": "Siempreviva de Palmer",
-                "price": "$130 MXN",
-                "image": "img/img_productos/Desierto/siempreviva.jpeg",
-                "description": "Suculenta de hojas verdes con bordes rojizos, resistente a la sequía y con flores amarillas en primavera. Ideal para jardines de bajo mantenimiento.",
-                "stock": "In Stock"
+                "nombre": "Siempreviva de Palmer",
+                "precio": "$130 MXN",
+                "fotos": "img/img_productos/Desierto/siempreviva.jpeg",
+                "descripcion": "Succulent with green leaves and reddish edges, drought-resistant with yellow flowers in spring. Ideal for low-maintenance gardens.",
+                "cantidad_almacen": 75,
+                "fabricante": "Suculentas del Sol",
+                "origen": "Mexico"
             },
             "lirio": {
-                "name": "Lirio de Agua",
-                "price": "$90 MXN",
-                "image": "img/img_productos/Agua/lirio.jpg",
-                "description": "Planta flotante con flores vistosas, ideal para decorar estanques.",
-                "stock": "In Stock"
+                "nombre": "Lirio de Agua",
+                "precio": "$90 MXN",
+                "fotos": "img/img_productos/Agua/lirio.jpg",
+                "descripcion": "Floating plant with showy flowers, ideal for decorating ponds.",
+                "cantidad_almacen": 20,
+                "fabricante": "AquaFlores",
+                "origen": "South America"
             },
             "jacinto": {
-                "name": "Jacinto de Agua",
-                "price": "$100 MXN",
-                "image": "img/img_productos/Agua/jacinto.jpg",
-                "description": "Planta flotante que oxigena el agua y previene la formación de algas.",
-                "stock": "In Stock"
+                "nombre": "Jacinto de Agua",
+                "precio": "$100 MXN",
+                "fotos": "img/img_productos/Agua/jacinto.jpg",
+                "descripcion": "Floating plant that oxygenates the water and prevents algae formation.",
+                "cantidad_almacen": 62,
+                "fabricante": "AquaVida",
+                "origen": "Amazon"
             },
             "cabomba": {
-                "name": "Cabomba Caroliniana",
-                "price": "$70 MXN",
-                "image": "img/img_productos/Agua/cabomba.jpeg",
-                "description": "Planta sumergida con hojas delicadas, útil para refugio de peces.",
-                "stock": "In Stock"
+                "nombre": "Cabomba Caroliniana",
+                "precio": "$70 MXN",
+                "fotos": "img/img_productos/Agua/cabomba.jpeg",
+                "descripcion": "Submerged plant with delicate leaves, useful for fish shelter.",
+                "cantidad_almacen": 80,
+                "fabricante": "AquaPlantas",
+                "origen": "United States"
             },
             "musgo": {
-                "name": "Musgo de Java",
-                "price": "$50 MXN",
-                "image": "img/img_productos/Agua/musgoJava.webp",
-                "description": "Musgo fácil de cuidar que mejora la estética de acuarios.",
-                "stock": "In Stock"
+                "nombre": "Musgo de Java",
+                "precio": "$50 MXN",
+                "fotos": "img/img_productos/Agua/musgoJava.webp",
+                "descripcion": "Easy-to-care-for moss that enhances aquarium aesthetics.",
+                "cantidad_almacen": 28,
+                "fabricante": "GreenWater",
+                "origen": "Asia"
             },
             "anubias": {
-                "name": "Anubias Barteri",
-                "price": "$90 MXN",
-                "image": "img/img_productos/Agua/anubias.jpeg",
-                "description": "Planta robusta de hojas gruesas, ideal para acuarios de bajo mantenimiento.",
-                "stock": "In Stock"
+                "nombre": "Anubias Barteri",
+                "precio": "$90 MXN",
+                "fotos": "img/img_productos/Agua/anubias.jpeg",
+                "descripcion": "Robust plant with thick leaves, ideal for low-maintenance aquariums.",
+                "cantidad_almacen": 95,
+                "fabricante": "AquaPlantas",
+                "origen": "West Africa"
             },
             "helecho": {
-                "name": "Helecho Boston",
-                "price": "$130 MXN",
-                "image": "img/img_productos/Sombra/helecho.jpeg",
-                "description": "Planta frondosa que da un toque natural a interiores y jardines sombreados.",
-                "stock": "In Stock"
+                "nombre": "Helecho Boston",
+                "precio": "$130 MXN",
+                "fotos": "img/img_productos/Sombra/helecho.jpeg",
+                "descripcion": "Lush plant that adds a natural touch to interiors and shaded gardens.",
+                "cantidad_almacen": 60,
+                "fabricante": "SombraVerde",
+                "origen": "Florida, USA"
             },
             "calathea": {
-                "name": "Calathea Orbifolia",
-                "price": "$280 MXN",
-                "image": "img/img_productos/Sombra/calathea.jpg",
-                "description": "Planta tropical con hojas grandes y rayadas, ideal para decoración.",
-                "stock": "In Stock"
+                "nombre": "Calathea Orbifolia",
+                "precio": "$280 MXN",
+                "fotos": "img/img_productos/Sombra/calathea.jpg",
+                "descripcion": "Tropical plant with large, striped leaves, ideal for decoration.",
+                "cantidad_almacen": 33,
+                "fabricante": "CasaCalathea",
+                "origen": "South America"
             },
             "palmaKentia": {
-                "name": "Palma Kentia",
-                "price": "$500 MXN",
-                "image": "img/img_productos/Sombra/palmaKentia.jpg",
-                "description": "Palma elegante y de crecimiento lento, perfecta para interiores oscuros.",
-                "stock": "In Stock"
+                "nombre": "Palma Kentia",
+                "precio": "$500 MXN",
+                "fotos": "img/img_productos/Sombra/palmaKentia.jpg",
+                "descripcion": "Elegant, slow-growing palm, perfect for dark interiors.",
+                "cantidad_almacen": 41,
+                "fabricante": "Jardines Kentia",
+                "origen": "Australia"
             },
             "aspidistra": {
-                "name": "Aspidistra Elatior",
-                "price": "$250 MXN",
-                "image": "img/img_productos/Sombra/aspidistra.jpg",
-                "description": "Planta resistente, ideal para espacios con poca luz y cuidado mínimo.",
-                "stock": "In Stock"
+                "nombre": "Aspidistra Elatior",
+                "precio": "$250 MXN",
+                "fotos": "img/img_productos/Sombra/aspidistra.jpg",
+                "descripcion": "Resistant plant, ideal for low-light spaces and minimal care.",
+                "cantidad_almacen": 47,
+                "fabricante": "SombraFeliz",
+                "origen": "East Asia"
             },
             "dieffenbachia": {
-                "name": "Dieffenbachia Seguine",
-                "price": "$180 MXN",
-                "image": "img/img_productos/Sombra/dieffenbachia.jpeg",
-                "description": "Planta tropical con hojas grandes, perfecta para interiores con sombra.",
-                "stock": "In Stock"
+                "nombre": "Dieffenbachia Seguine",
+                "precio": "$180 MXN",
+                "fotos": "img/img_productos/Sombra/dieffenbachia.jpeg",
+                "descripcion": "Tropical plant with large leaves, perfect for shaded interiors.",
+                "cantidad_almacen": 53,
+                "fabricante": "VerdeTropical",
+                "origen": "South America"
             },
             "lavanda": {
-                "name": "Lavanda",
-                "price": "$100 MXN",
-                "image": "img/img_productos/Aromaticas/lavanda .jpg",
-                "description": "Planta aromática con flores púrpuras, usada en aceites esenciales y relajación.",
-                "stock": "In Stock"
+                "nombre": "Lavanda",
+                "precio": "$100 MXN",
+                "fotos": "img/img_productos/Aromaticas/lavanda .jpg",
+                "descripcion": "Aromatic plant with purple flowers, used in essential oils and relaxation.",
+                "cantidad_almacen": 38,
+                "fabricante": "Aromas del Campo",
+                "origen": "Mediterranean"
             },
             "romero": {
-                "name": "Romero",
-                "price": "$80 MXN",
-                "image": "img/img_productos/Aromaticas/romero.jpg",
-                "description": "Hierba versátil en cocina y medicina natural, con propiedades digestivas.",
-                "stock": "In Stock"
+                "nombre": "Romero",
+                "precio": "$80 MXN",
+                "fotos": "img/img_productos/Aromaticas/romero.jpg",
+                "descripcion": "Versatile herb in cooking and natural medicine, with digestive properties.",
+                "cantidad_almacen": 27,
+                "fabricante": "HierbasVivas",
+                "origen": "Mediterranean Region"
             },
             "tomillo": {
-                "name": "Tomillo",
-                "price": "$75 MXN",
-                "image": "img/img_productos/Aromaticas/tomillo.jpeg",
-                "description": "Hierba aromática usada en cocina y remedios naturales, conocida por sus propiedades antisépticas y su sabor característico.",
-                "stock": "In Stock"
+                "nombre": "Tomillo",
+                "precio": "$75 MXN",
+                "fotos": "img/img_productos/Aromaticas/tomillo.jpeg",
+                "descripcion": "Aromatic herb used in cooking and natural remedies, known for its antiseptic properties and distinctive flavor.",
+                "cantidad_almacen": 43,
+                "fabricante": "Aroma Natural",
+                "origen": "Mediterranean"
             },
             "hierbabuena": {
-                "name": "Hierbabuena",
-                "price": "$60 MXN",
-                "image": "img/img_productos/Aromaticas/hierbabuena.jpg",
-                "description": "Planta refrescante utilizada en bebidas, postres y remedios caseros.",
-                "stock": "In Stock"
+                "nombre": "Hierbabuena",
+                "precio": "$60 MXN",
+                "fotos": "img/img_productos/Aromaticas/hierbabuena.jpg",
+                "descripcion": "Refreshing plant used in beverages, desserts, and home remedies.",
+                "cantidad_almacen": 50,
+                "fabricante": "Aromas Verdes",
+                "origen": "Asia"
             },
             "albahaca": {
-                "name": "Albahaca",
-                "price": "$70 MXN",
-                "image": "img/img_productos/Aromaticas/albahaca.jpg",
-                "description": "Planta de hojas aromáticas, esencial en cocina mediterránea.",
-                "stock": "In Stock"
+                "nombre": "Albahaca",
+                "precio": "$70 MXN",
+                "fotos": "img/img_productos/Aromaticas/albahaca.jpg",
+                "descripcion": "Aromatic leaf plant, essential in Mediterranean cuisine.",
+                "cantidad_almacen": 22,
+                "fabricante": "Herbario CasaVerde",
+                "origen": "India"
             },
             "monstera": {
-                "name": "Monstera Deliciosa",
-                "price": "$400 MXN",
-                "image": "img/img_productos/Casa/monstera.jpeg",
-                "description": "Planta de hojas grandes con agujeros, ideal para decorar espacios amplios.",
-                "stock": "In Stock"
+                "nombre": "Monstera Deliciosa",
+                "precio": "$400 MXN",
+                "fotos": "img/img_productos/Casa/monstera.jpeg",
+                "descripcion": "Plant with large, holey leaves, perfect for decorating large spaces.",
+                "cantidad_almacen": 18,
+                "fabricante": "Hogar Verde",
+                "origen": "Mexico and Central America"
             },
             "lengua": {
-                "name": "Sansevieria (Lengua de Suegra)",
-                "price": "$150 MXN",
-                "image": "img/img_productos/Casa/lenguaSuegra.jpeg",
-                "description": "Planta purificadora de aire, muy resistente.",
-                "stock": "In Stock"
+                "nombre": "Sansevieria (Lengua de Suegra)",
+                "precio": "$150 MXN",
+                "fotos": "img/img_productos/Casa/lenguaSuegra.jpeg",
+                "descripcion": "Air-purifying plant, highly resilient.",
+                "cantidad_almacen": 45,
+                "fabricante": "VerdeBienestar",
+                "origen": "West Africa"
             },
             "zamioculcas": {
-                "name": "Zamioculcas Zamiifolia (ZZ Plant)",
-                "price": "$300 MXN",
-                "image": "img/img_productos/Casa/zamioculcas.jpeg",
-                "description": "Planta de bajo mantenimiento, perfecta para interiores oscuros.",
-                "stock": "In Stock"
+                "nombre": "Zamioculcas Zamiifolia (ZZ Plant)",
+                "precio": "$300 MXN",
+                "fotos": "img/img_productos/Casa/zamioculcas.jpeg",
+                "descripcion": "Low-maintenance plant, perfect for dark interiors.",
+                "cantidad_almacen": 34,
+                "fabricante": "PlantasZeta",
+                "origen": "Tanzania"
             },
             "plantaChina": {
-                "name": "Pilea Peperomioides (Planta China del Dinero)",
-                "price": "$160 MXN",
-                "image": "img/img_productos/Casa/pilea.jpeg",
-                "description": "Planta de hojas redondeadas, popular en decoración moderna.",
-                "stock": "In Stock"
+                "nombre": "Pilea Peperomioides (Chinese Money Plant)",
+                "precio": "$160 MXN",
+                "fotos": "img/img_productos/Casa/pilea.jpeg",
+                "descripcion": "Plant with rounded leaves, popular in modern decor.",
+                "cantidad_almacen": 59,
+                "fabricante": "VerdeCasa",
+                "origen": "China"
             },
             "paloBrasil": {
-                "name": "Palo de Brasil",
-                "price": "$350 MXN",
-                "image": "img/img_productos/Casa/paloBrasil.jpeg",
-                "description": "Planta decorativa de hojas verdes brillantes, ideal para interiores por su fácil cuidado y capacidad purificadora de aire.",
-                "stock": "In Stock"
+                "nombre": "Palo de Brasil",
+                "precio": "$350 MXN",
+                "fotos": "img/img_productos/Casa/paloBrasil.jpeg",
+                "descripcion": "Decorative plant with bright green leaves, ideal for interiors due to its easy care and air-purifying ability.",
+                "cantidad_almacen": 60,
+                "fabricante": "CasaPlanta",
+                "origen": "Brazil"
             },
             "ajenjo": {
-                "name": "Ajenjo",
-                "price": "$85 MXN",
-                "image": "img/img_productos/Medicinales/ajenjo.jpeg",
-                "description": "Con propiedades digestivas y antiparasitarias, el ajenjo se usa en infusiones para aliviar problemas gastrointestinales. También se utiliza en la elaboración de ciertos licores.",
-                "stock": "In Stock"
+                "nombre": "Ajenjo",
+                "precio": "$85 MXN",
+                "fotos": "img/img_productos/Medicinales/ajenjo.jpeg",
+                "descripcion": "With digestive and antiparasitic properties, it is used in infusions to relieve gastrointestinal problems. Also used in making certain liqueurs.",
+                "cantidad_almacen": 36,
+                "fabricante": "HerbalNature",
+                "origen": "Europe"
             },
             "echinacea": {
-                "name": "Echinacea",
-                "price": "$90 MXN",
-                "image": "img/img_productos/Medicinales/equinacea.jpeg",
-                "description": "Estimula el sistema inmunológico, ayudando a prevenir y tratar resfriados y otras infecciones respiratorias.",
-                "stock": "In Stock"
+                "nombre": "Echinacea",
+                "precio": "$90 MXN",
+                "fotos": "img/img_productos/Medicinales/equinacea.jpeg",
+                "descripcion": "Boosts the immune system, helping prevent and treat colds and other respiratory infections.",
+                "cantidad_almacen": 48,
+                "fabricante": "Herbales Del Bosque",
+                "origen": "North America"
             },
             "manzanilla": {
-                "name": "Manzanilla",
-                "price": "$65 MXN",
-                "image": "img/img_productos/Medicinales/manzanilla.png",
-                "description": "Conocida por sus propiedades calmantes, la manzanilla se usa en infusiones para reducir el estrés, mejorar el sueño y aliviar molestias digestivas leves.",
-                "stock": "In Stock"
+                "nombre": "Manzanilla",
+                "precio": "$65 MXN",
+                "fotos": "img/img_productos/Medicinales/manzanilla.png",
+                "descripcion": "Known for its calming properties, it is used in infusions to reduce stress, improve sleep, and relieve mild digestive discomfort.",
+                "cantidad_almacen": 23,
+                "fabricante": "NaturalHerbs",
+                "origen": "Europe"
             },
             "ortiga": {
-                "name": "Ortiga (Urtica Dioica)",
-                "price": "$70 MXN",
-                "image": "img/img_productos/Medicinales/ortiga.jpeg",
-                "description": "Con propiedades antiinflamatorias y diuréticas, la ortiga se utiliza para aliviar síntomas de alergias y para tratar problemas de retención de líquidos.",
-                "stock": "In Stock"
+                "nombre": "Ortiga (Urtica Dioica)",
+                "precio": "$70 MXN",
+                "fotos": "img/img_productos/Medicinales/ortiga.jpeg",
+                "descripcion": "With anti-inflammatory and diuretic properties, it is used to relieve allergy symptoms and treat fluid retention issues.",
+                "cantidad_almacen": 77,
+                "fabricante": "Hierbas Naturales",
+                "origen": "Europe and Asia"
             },
             "salvia": {
-                "name": "Salvia",
-                "price": "$100 MXN",
-                "image": "img/img_productos/Medicinales/salvia.jpg",
-                "description": "Utilizada para mejorar la digestión y aliviar dolores menstruales. También se emplea en gárgaras para tratar dolor de garganta y problemas bucales.",
-                "stock": "In Stock"
+                "nombre": "Salvia",
+                "precio": "$100 MXN",
+                "fotos": "img/img_productos/Medicinales/salvia.jpg",
+                "descripcion": "Used to improve digestion and relieve menstrual pain. Also used in gargles for sore throat and oral issues.",
+                "cantidad_almacen": 42,
+                "fabricante": "NatureHerbs",
+                "origen": "Mediterranean Region"
             }
         };
+
+
 
         // Obtener el id del producto desde los parámetros de la URL
         const productId = getQueryParams();
@@ -307,15 +378,17 @@
 
         // Renderizar la información del producto
         if (product) {
-            document.querySelector('h1').innerText = product.name;
-            document.querySelector('h3').innerText = product.price;
-            document.querySelector('.img-fluid').src = product.image;
+            document.querySelector('h1').innerText = product.nombre;
+            document.querySelector('h3').innerText = product.precio;
+            document.querySelector('.img-fluid').src = product.fotos;
             document.querySelector('.img-fluid').alt = product.name;
-            document.querySelector('p.text-success').innerText = product.stock;
-            document.querySelector('p.description').innerText = product.description;
+            document.querySelector('p.text-secondary').innerText = product.cantidad_almacen > 0 ? "--- " + product.cantidad_almacen + " in stock ---" : "Out of stock";
+            document.querySelector('p.description').innerText = product.descripcion;
+            document.querySelector('p.origen').innerText = "Origin: " + product.origen;
+            document.querySelector('p.fabricante').innerText = "Manufacturer: " + product.fabricante;
         } else {
             // Si no se encuentra el producto, mostrar un mensaje de error o redirigir
-            document.querySelector('h1').innerText = "Producto no encontrado";
+            document.querySelector('h1').innerText = "Product not found";
         }
     </script>
 
