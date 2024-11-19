@@ -27,16 +27,10 @@
                     <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-
-                    <!-- User Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle me-2"></i>
-                            <?php
-                            // Verifica si el usuario está en sesión y muestra su nombre
-                            echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User';
-                            ?>
+                            <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User'; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <?php if (isset($_SESSION['user_id'])): ?>
@@ -52,33 +46,56 @@
             </div>
         </div>
     </nav>
+
+    <!-- Cart Section -->
     <div class="container py-5">
-        <h3 class="text-center">Your Cart</h3>
-        <table class="table mt-4">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Plant 1</td>
-                    <td>$15.00</td>
-                    <td>1</td>
-                    <td>$15.00</td>
-                </tr>
-                <!-- Repeat for other cart items -->
-            </tbody>
-        </table>
-        <div class="text-end">
-            <p class="total-price">Total: $15.00</p>
-            <a href="checkout.php" class="btn btn-custom">Proceed to Checkout</a>
+        <h2 class="mb-4">My Shopping Bag</h2>
+        <div class="row">
+            <!-- Product List -->
+            <div class="col-md-8">
+                <?php if (count($_SESSION['cart']) > 0): ?>
+                    <?php foreach ($_SESSION['cart'] as $item): ?>
+                        <div class="row border-bottom py-3">
+                            <div class="col-3">
+                                <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>" class="img-fluid">
+                            </div>
+                            <div class="col-6">
+                                <h5><?php echo $item['name']; ?></h5>
+                                <p>Price: $<?php echo number_format($item['price'], 2); ?></p>
+                                <p>Quantity: <?php echo $item['quantity']; ?></p>
+                            </div>
+                            <div class="col-3 text-end">
+                                <p>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Your cart is empty.</p>
+                <?php endif; ?>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="col-md-4">
+                <div class="card p-4">
+                    <h5 class="mb-3">Summary</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span>$<?php echo number_format($totalPrice, 2); ?></span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping (4-7 business days)</span>
+                        <span>$65 MXN</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Estimated Total</strong>
+                        <strong>$<?php echo number_format($totalPrice, 2); ?></strong>
+                    </div>
+                    <a href="checkout.php" class="btn btn-custom btn-lg w-100">Checkout</a>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
