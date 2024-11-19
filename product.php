@@ -65,10 +65,6 @@
                 <h3 class="text-secondary">$0 MXN</h3>
                 <!-- producto -->
                 <h1 class="mb-3">Nombre del Producto</h1>
-                <div class="d-flex align-items-center mb-3">
-                    <span class="me-2">★★★★★</span>
-                    <a href="#" class="ms-3 text-muted">Write A Review</a>
-                </div>
                 <!-- stock -->
                 <p class="text-secondary mb-3">In Stock</p>
                 <!-- descripción -->
