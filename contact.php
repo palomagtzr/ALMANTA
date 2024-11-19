@@ -1,39 +1,6 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php'); // Redirige al login si no hay sesión activa
-    exit();
-}
 ?>
-<?php
-session_start();
-include('conection.php'); // Incluye el archivo de conexión a la base de datos
-
-// Verifica si el usuario está autenticado
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php'); // Redirige al login si no hay sesión activa
-    exit();
-}
-
-// Obtener el ID del usuario de la sesión
-$user_id = $_SESSION['user_id'];
-
-// Consulta para obtener la información del usuario desde la base de datos
-$query = "SELECT * FROM usuarios WHERE id = '$user_id'";
-$result = mysqli_query($con, $query);
-
-if ($result && mysqli_num_rows($result) == 1) {
-    $user = mysqli_fetch_assoc($result);
-} else {
-    // En caso de que el usuario no exista en la base de datos
-    echo "Usuario no encontrado.";
-    exit();
-}
-
-mysqli_close($con);
-?>
-
 <!DOCTYPE php>
 <php lang="en">
 
@@ -85,20 +52,16 @@ mysqli_close($con);
 
         <!-- Profile Information -->
         <div class="container py-5">
-            <h2 class="display-4 text-center mb-4">USER PROFILE</h2>
+            <h2 class="display-4 text-center mb-4">CONTACT INFO</h2>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <p><strong>Name:</strong> <?php echo htmlspecialchars($user['nombre']); ?></p>
-                            <p><strong>Email:</strong> <?php echo htmlspecialchars($user['correo']); ?></p>
-                            <p><strong>Birthdate:</strong>
-                                <?php echo htmlspecialchars($user['fecha_nacimiento']); ?></p>
-                            <p><strong>Bank card number:</strong>
-                                <?php echo htmlspecialchars($user['num_tarjeta_bancaria']); ?></p>
-                            <p><strong>Postal address:</strong>
-                                <?php echo htmlspecialchars($user['direccion_postal']); ?>
-                            </p>
+                            <p><strong>Owner name: </strong>Paloma Gutiérrez Ricaud</p>
+                            <p><strong>Email: </strong>palomagutric@gmail.com</p>
+                            <p><strong>Instagram: </strong>@palomagtzr</p>
+                            <p><strong>Phone: </strong>+52 55 48 70 65 43</p>
+                            <p><strong>Location: </strong>Mexico City</p>
                         </div>
                     </div>
                 </div>

@@ -30,17 +30,11 @@ session_start();
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-
-                    <!-- User Dropdown -->
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle me-2"></i>
-                            <?php
-                            // Verifica si el usuario está en sesión y muestra su nombre
-                            echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User';
-                            ?>
+                            <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User'; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <?php if (isset($_SESSION['user_id'])): ?>
@@ -171,7 +165,7 @@ session_start();
 
     <!-- Footer -->
     <footer class="footer py-4 text-center">
-        <p>&copy; 2024 Plant Shop. All rights reserved. | <a href="" style="color: white;">Privacy
+        <p>&copy; 2024 ALMANTA. All rights reserved. | <a href="" style="color: white;">Privacy
                 Policy</a></p>
     </footer>
 
