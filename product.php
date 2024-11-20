@@ -4,25 +4,28 @@ session_start();
 // Conexión a la base de datos
 $conn = mysqli_connect("localhost", "root", "", "tienda");
 
-// Validar la conexión
+// Validar la conexión a la BdD
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
     exit();
 }
 
-// Verificar si el usuario está logueado
+// Verificar si el usuario tiene una sesión abierta
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Procesar la acción de agregar al carrito
+// Cuando se agrega un producto al carrito
+//Se verifica que los datos del producto sean enviados correctamente
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    //Obtiene el ID del producto que se quiere agregar al carrito (intval: convierte el número a entero)
     $product_id = intval($_POST['product_id']);
+    //Obtiene la cantidad del producto que se quiere agregar al carrito (intval: convierte el número a entero)
     $quantity = intval($_POST['quantity']);
     $user_id = $_SESSION['user_id'];
 
-    // Obtener datos del producto
+    // Se obtienen los datos del producto
     $stmt = $conn->prepare("SELECT cantidad_almacen, nombre FROM productos WHERE id = ?");
     $stmt->bind_param("i", $product_id);
     $stmt->execute();

@@ -74,7 +74,7 @@ $action = "INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contraseña`, `fec
         <?php
         // Ejecución de la consulta e impresión de mensaje
         if (mysqli_query($con, $action)) {
-            echo '<h1 class="display-4 text-success">¡Thank you ' . htmlspecialchars($name) . '!</h1>';
+            echo '<h1 class="display-4 text-secondary">¡Thank you ' . htmlspecialchars($name) . '!</h1>';
         } else {
             echo '<h1 class="display-5 text-danger">Error en el registro</h1>';
             echo "<p>Error: " . mysqli_error($con) . "</p>";
