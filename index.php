@@ -8,9 +8,9 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Shop - Home</title>
+    <title>ALMANTA - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="/img/ALMANTA_logo.png" type="image/png">
 </head>
 
@@ -28,9 +28,9 @@ session_start();
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="php/catalog.php">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="php/cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="php/contact.php">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,11 +38,11 @@ session_start();
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <?php if (isset($_SESSION['user_id'])): ?>
-                                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                                <li><a class="dropdown-item" href="logout.php">Log out</a></li>
+                                <li><a class="dropdown-item" href="php/profile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="php/logout.php">Log out</a></li>
                             <?php else: ?>
-                                <li><a class="dropdown-item" href="register.php">Register</a></li>
-                                <li><a class="dropdown-item" href="login.php">Log in</a></li>
+                                <li><a class="dropdown-item" href="php/register.php">Register</a></li>
+                                <li><a class="dropdown-item" href="php/login.php">Log in</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -59,7 +59,7 @@ session_start();
             <p class="lead">Discover our curated collection of various types of plants and some botanical treasures to
                 brighten up your
                 space.</p>
-            <a href="catalog.php" class="btn btn-custom btn-lg mt-3">Shop Now</a>
+            <a href="php/catalog.php" class="btn btn-custom btn-lg mt-3">Shop Now</a>
         </div>
     </header>
 
@@ -72,7 +72,7 @@ session_start();
                     <img src="img/img_main/desierto.jpg" class="card-img-top" alt="Desert">
                     <div class="card-body">
                         <h5 class="card-title">DESERT PLANTS</h5>
-                        <a href="catalog.php#desert-plants" class="btn btn-custom">View Collection</a>
+                        <a href="php/catalog.php#desert-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@ session_start();
                     <img src="img/img_main/agua.jpg" class="card-img-top" alt="Ferns">
                     <div class="card-body">
                         <h5 class="card-title">WATER PLANTS</h5>
-                        <a href="catalog.php#water-plants" class="btn btn-custom">View Collection</a>
+                        <a href="php/catalog.php#water-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@ session_start();
                     <img src="img/img_main/aromaticas.jpg" class="card-img-top" alt="Flowering Plants">
                     <div class="card-body">
                         <h5 class="card-title">AROMATIC PLANTS</h5>
-                        <a href="catalog.php#aromatic-plants" class="btn btn-custom">View Collection</a>
+                        <a href="php/catalog.php#aromatic-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@ session_start();
                     <img src="img/img_main/casa.jpg" class="card-img-top" alt="Cacti">
                     <div class="card-body">
                         <h5 class="card-title">HOUSE PLANTS</h5>
-                        <a href="catalog.php#house-plants" class="btn btn-custom">View Collection</a>
+                        <a href="php/catalog.php#house-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@ session_start();
                     <img src="img/img_main/sombra.jpg" class="card-img-top" alt="Indoor Plants">
                     <div class="card-body">
                         <h5 class="card-title">INDOOR PLANTS</h5>
-                        <a href="catalog.php#indoor-plants" class="btn btn-custom">View Collection</a>
+                        <a href="php/catalog.php#indoor-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@ session_start();
                     <img src="img/img_main/medicinales.jpg" class="card-img-top" alt="Bonsai">
                     <div class="card-body">
                         <h5 class="card-title">MEDICINAL PLANTS</h5>
-                        <a href="catalog.php#medicinal-plants" class="btn btn-custom">View Collection</a>
+                        <a href="php/catalog.php#medicinal-plants" class="btn btn-custom">View Collection</a>
                     </div>
                 </div>
             </div>

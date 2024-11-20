@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - ALMANTA</title>
+    <title>ALMANTA - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/img/ALMANTA_logo.png" type="image/png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/ALMANTA_logo.png" type="image/png">
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a href="index.php" class="navbar-brand">
-                <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
+            <a href="../index.php" class="navbar-brand">
+                <img src="../img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
             </a>
-            <a class="navbar-brand" href="index.php">Menu</a>
+            <a class="navbar-brand" href="../index.php">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

@@ -84,7 +84,7 @@ body {
 }
 
 .hero-section {
-    background-image: url('img/plantas_cover.jpg');
+    background-image: url('../img/plantas_cover.jpg');
     background-size: cover;
     background-position: center;
     height: 80vh;
