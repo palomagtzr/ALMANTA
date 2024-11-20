@@ -141,14 +141,14 @@ $stmt->close();
         <h2 class="mb-4">My Shopping Bag</h2>
 
         <?php if (isset($success_message)): ?>
-            <div class="alert alert-success alert-dismissible">
+            <div class="alert alert-success alert-dismissible fade show">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Success!</strong> <?php echo $success_message; ?>
             </div>
         <?php endif; ?>
 
         <?php if (isset($error_message)): ?>
-            <div class="alert alert-danger alert-dismissible">
+            <div class="alert alert-danger alert-dismissible fade show">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Error!</strong> <?php echo $error_message; ?>
             </div>
