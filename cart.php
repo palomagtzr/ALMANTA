@@ -1,18 +1,92 @@
 <?php
 session_start();
 
-// Initialize cart if not already set
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
 }
 
-// Calculate the total price
+// Conexión a la base de datos
+$conn = mysqli_connect("localhost", "root", "", "tienda");
+
+// Validar la conexión
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+}
+
+// Actualizar la cantidad de productos en el carrito
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])) {
+    $product_id = intval($_POST['product_id']);
+    $new_quantity = intval($_POST['quantity']);
+    $user_id = $_SESSION['user_id'];
+
+    // Validar que la cantidad sea mayor a 0
+    if ($new_quantity > 0) {
+        // Verificar el stock disponible
+        $stmt = $conn->prepare("SELECT cantidad_almacen FROM productos WHERE id = ?");
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $product = $result->fetch_assoc();
+        $stmt->close();
+
+        if ($new_quantity > $product['cantidad_almacen']) {
+            $error_message = "Only {$product['cantidad_almacen']} units are available for this product.";
+        } else {
+            // Actualizar la cantidad en la tabla carrito
+            $stmt = $conn->prepare("UPDATE carrito SET cantidad = ? WHERE id_usuario = ? AND id_producto = ?");
+            $stmt->bind_param("iii", $new_quantity, $user_id, $product_id);
+            $stmt->execute();
+            $stmt->close();
+            $success_message = "The quantity has been updated successfully.";
+        }
+    } else {
+        // Si la cantidad es 0, elimina el producto del carrito
+        $stmt = $conn->prepare("DELETE FROM carrito WHERE id_usuario = ? AND id_producto = ?");
+        $stmt->bind_param("ii", $user_id, $product_id);
+        $stmt->execute();
+        $stmt->close();
+        $success_message = "The product has been removed from your cart.";
+    }
+}
+
+// Eliminar un producto del carrito
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product'])) {
+    $product_id = intval($_POST['product_id']);
+    $user_id = $_SESSION['user_id'];
+
+    $stmt = $conn->prepare("DELETE FROM carrito WHERE id_usuario = ? AND id_producto = ?");
+    $stmt->bind_param("ii", $user_id, $product_id);
+    $stmt->execute();
+    $stmt->close();
+
+    $success_message = "The product has been removed from your cart.";
+}
+
+// Cargar productos del carrito desde la base de datos
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT productos.nombre, productos.precio, productos.fotos, carrito.id_producto, carrito.cantidad 
+        FROM carrito 
+        JOIN productos ON carrito.id_producto = productos.id 
+        WHERE carrito.id_usuario = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$cart_items = [];
 $totalPrice = 0;
-foreach ($_SESSION['cart'] as $item) {
-    $totalPrice += $item['price'] * $item['quantity'];
-}
-?>
 
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $cart_items[] = $row;
+        $totalPrice += $row['precio'] * $row['cantidad'];
+    }
+}
+$stmt->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,31 +139,54 @@ foreach ($_SESSION['cart'] as $item) {
     <!-- Cart Section -->
     <div class="container py-5">
         <h2 class="mb-4">My Shopping Bag</h2>
+
+        <?php if (isset($success_message)): ?>
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Success!</strong> <?php echo $success_message; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($error_message)): ?>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Error!</strong> <?php echo $error_message; ?>
+            </div>
+        <?php endif; ?>
+
         <div class="row">
-            <!-- Product List -->
             <div class="col-md-8">
-                <?php if (count($_SESSION['cart']) > 0): ?>
-                    <?php foreach ($_SESSION['cart'] as $item): ?>
-                        <div class="row border-bottom py-3">
-                            <div class="col-3">
-                                <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>" class="img-fluid">
+                <?php if (count($cart_items) > 0): ?>
+                    <?php foreach ($cart_items as $item): ?>
+                        <form method="POST" action="">
+                            <div class="row border-bottom py-3">
+                                <div class="col-3">
+                                    <img src="<?php echo htmlspecialchars($item['fotos']); ?>"
+                                        alt="<?php echo htmlspecialchars($item['nombre']); ?>" class="img-fluid">
+                                </div>
+                                <div class="col-6">
+                                    <h5><?php echo htmlspecialchars($item['nombre']); ?></h5>
+                                    <p>Price: $<?php echo number_format($item['precio'], 2); ?></p>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <label for="quantity-<?php echo $item['id_producto']; ?>" class="me-3">Qty</label>
+                                        <input type="number" id="quantity-<?php echo $item['id_producto']; ?>" name="quantity"
+                                            class="form-control w-auto" value="<?php echo $item['cantidad']; ?>" min="1">
+                                    </div>
+                                    <input type="hidden" name="product_id" value="<?php echo $item['id_producto']; ?>">
+                                    <button type="submit" name="update_cart" class="btn btn-primary btn-sm">Update</button>
+                                    <button type="submit" name="delete_product" class="btn btn-danger btn-sm">Remove</button>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <p>$<?php echo number_format($item['precio'] * $item['cantidad'], 2); ?></p>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <h5><?php echo $item['name']; ?></h5>
-                                <p>Price: $<?php echo number_format($item['price'], 2); ?></p>
-                                <p>Quantity: <?php echo $item['quantity']; ?></p>
-                            </div>
-                            <div class="col-3 text-end">
-                                <p>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></p>
-                            </div>
-                        </div>
+                        </form>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>Your cart is empty.</p>
                 <?php endif; ?>
             </div>
 
-            <!-- Summary Section -->
             <div class="col-md-4">
                 <div class="card p-4">
                     <h5 class="mb-3">Summary</h5>
@@ -104,7 +201,7 @@ foreach ($_SESSION['cart'] as $item) {
                     <hr>
                     <div class="d-flex justify-content-between mb-3">
                         <strong>Estimated Total</strong>
-                        <strong>$<?php echo number_format($totalPrice, 2); ?></strong>
+                        <strong>$<?php echo number_format($totalPrice + 65, 2); ?></strong>
                     </div>
                     <a href="checkout.php" class="btn btn-custom btn-lg w-100">Checkout</a>
                 </div>

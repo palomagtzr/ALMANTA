@@ -10,32 +10,68 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM productos WHERE alt_nombre = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $id);
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Procesar la acción de agregar al carrito
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $product_id = intval($_POST['product_id']);
+    $quantity = intval($_POST['quantity']);
+    $user_id = $_SESSION['user_id'];
+
+    // Obtener datos del producto
+    $stmt = $conn->prepare("SELECT cantidad_almacen, nombre FROM productos WHERE id = ?");
+    $stmt->bind_param("i", $product_id);
     $stmt->execute();
     $result = $stmt->get_result();
+    $product = $result->fetch_assoc();
+    $stmt->close();
 
-    if ($result->num_rows == 1) {
-        $product = $result->fetch_assoc();
+    if ($product['cantidad_almacen'] <= 0) {
+        $error_message = "The product is out of stock.";
+    } elseif ($quantity > $product['cantidad_almacen']) {
+        $error_message = "Only {$product['cantidad_almacen']} units of this product are available.";
     } else {
+        // Insertar o actualizar el producto en el carrito
+        $stmt = $conn->prepare("INSERT INTO carrito (id_usuario, id_producto, cantidad) 
+                                VALUES (?, ?, ?) 
+                                ON DUPLICATE KEY UPDATE cantidad = cantidad + ?");
+        $stmt->bind_param("iiii", $user_id, $product_id, $quantity, $quantity);
+        $stmt->execute();
+        $stmt->close();
+
+        // Mostrar mensaje de éxito
+        $success_message = "The product " . htmlspecialchars($product['nombre']) . " was added to the cart!";
+    }
+}
+
+// Obtener los datos del producto seleccionado
+if (isset($_GET['id'])) {
+    $alt_nombre = $_GET['id'];
+    $stmt = $conn->prepare("SELECT * FROM productos WHERE alt_nombre = ?");
+    $stmt->bind_param("s", $alt_nombre);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $product = $result->fetch_assoc();
+    $stmt->close();
+
+    if (!$product) {
         die("Product not found.");
     }
-    $stmt->close();
 } else {
-    die("Invalid product identifier.");
+    die("Invalid product ID.");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($product['nombre']); ?> - ALMANTA</title>
+    <title>ALMANTA - Product</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/img/ALMANTA_logo.png" type="image/png">
@@ -80,32 +116,46 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     <!-- Product Section -->
     <div class="container py-5">
+        <?php if (isset($success_message)): ?>
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>YAY!</strong> <?php echo $success_message; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($error_message)): ?>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oops!</strong> <?php echo $error_message; ?>
+            </div>
+        <?php endif; ?>
+
         <div class="row">
-            <!-- Imagen del producto -->
             <div class="col-md-6">
                 <img src="<?php echo htmlspecialchars($product['fotos']); ?>"
                     alt="<?php echo htmlspecialchars($product['nombre']); ?>" class="img-fluid">
             </div>
             <div class="col-md-6">
-                <!-- precio -->
                 <h3 class="text-secondary">$<?php echo number_format($product['precio'], 2); ?> MXN</h3>
-                <!-- producto -->
                 <h1 class="mb-3"><?php echo htmlspecialchars($product['nombre']); ?></h1>
-                <!-- stock -->
                 <p class="text-secondary mb-3">
-                    <?php echo $product['cantidad_almacen'] > 0 ? "--- " . $product['cantidad_almacen'] . " in stock ---" : "Out of stock"; ?>
+                    <?php echo $product['cantidad_almacen'] > 0 ? '--- ' . $product['cantidad_almacen'] . ' in stock ---' : '--- Out of stock ---'; ?>
                 </p>
-                <!-- descripción -->
                 <p class="description"><?php echo htmlspecialchars($product['descripcion']); ?></p>
-                <!-- origen -->
                 <p class="origen">Origin: <?php echo htmlspecialchars($product['origen']); ?></p>
-                <!-- fabricante -->
                 <p class="fabricante">Manufacturer: <?php echo htmlspecialchars($product['fabricante']); ?></p>
-                <div class="d-flex align-items-center mb-3">
-                    <label for="quantity" class="me-3">Qty</label>
-                    <input type="number" id="quantity" class="form-control w-auto" value="1" min="1">
-                </div>
-                <button class="btn btn-custom btn-lg w-100">Add to cart</button>
+                <form method="POST" action="">
+                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                    <div class="d-flex align-items-center mb-3">
+                        <label for="quantity" class="me-3">Qty</label>
+                        <input type="number" id="quantity" name="quantity" class="form-control w-auto" value="1"
+                            min="1">
+                    </div>
+                    <button type="submit" name="add_to_cart" class="btn btn-custom btn-lg w-100" <?php echo $product['cantidad_almacen'] <= 0 ? 'disabled' : ''; ?>>
+                        Add to cart
+                    </button>
+                </form>
+
             </div>
         </div>
     </div>
