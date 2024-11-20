@@ -20,7 +20,7 @@ session_start();
                 <a href="index.php" class="navbar-brand">
                     <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
                 </a>
-                <a class="navbar-brand" href="index.php">Menu</a>
+                <a class="navbar-brand" href="index.php">Menu width</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -62,6 +62,15 @@ session_start();
                             <p><strong>Instagram: </strong>@palomagtzr</p>
                             <p><strong>Phone: </strong>+52 55 48 70 65 43</p>
                             <p><strong>Location: </strong>Mexico City</p>
+                            <p><strong>Opening hours: </strong></p>
+                            <p>
+                            <pre>
+    Mon - Thu: 9:00am - 7:30pm
+    Fri - Sat: 10:00am - 8:30pm
+    Sun: Closed
+    Holidays: 10:00am - 3:00pm
+                            </pre>
+                            </p>
                         </div>
                     </div>
                 </div>

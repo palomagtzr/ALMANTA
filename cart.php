@@ -1,6 +1,18 @@
 <?php
 session_start();
+
+// Initialize cart if not already set
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// Calculate the total price
+$totalPrice = 0;
+foreach ($_SESSION['cart'] as $item) {
+    $totalPrice += $item['price'] * $item['quantity'];
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +41,7 @@ session_start();
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
