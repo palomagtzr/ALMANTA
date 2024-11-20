@@ -38,7 +38,7 @@ session_start();
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <?php if (isset($_SESSION['user_id'])): ?>
-                                <li><a class="dropdown-item" href="php/profile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="php/profile.php">Perfil</a></li>
                                 <li><a class="dropdown-item" href="php/logout.php">Log out</a></li>
                             <?php else: ?>
                                 <li><a class="dropdown-item" href="php/register.php">Register</a></li>
