@@ -19,37 +19,56 @@ if (!isset($_SESSION['user_id'])) {
 // Cuando se agrega un producto al carrito
 //Se verifica que los datos del producto sean enviados correctamente
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    //Obtiene el ID del producto que se quiere agregar al carrito (intval: convierte el número a entero)
+    // Obtener el ID y la cantidad del producto desde el formulario
     $product_id = intval($_POST['product_id']);
-    //Obtiene la cantidad del producto que se quiere agregar al carrito (intval: convierte el número a entero)
     $quantity = intval($_POST['quantity']);
     $user_id = $_SESSION['user_id'];
 
-    // Se obtienen los datos del producto
-    $stmt = $conn->prepare("SELECT cantidad_almacen, nombre FROM productos WHERE id = ?");
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $product = $result->fetch_assoc();
-    $stmt->close();
-
-    if ($product['cantidad_almacen'] <= 0) {
-        $error_message = "The product is out of stock.";
-    } elseif ($quantity > $product['cantidad_almacen']) {
-        $error_message = "Only {$product['cantidad_almacen']} units of this product are available.";
+    // Verificar que la cantidad sea válida
+    if ($quantity <= 0) {
+        $error_message = "Invalid quantity. Please add at least one product.";
     } else {
-        // Insertar o actualizar el producto en el carrito
-        $stmt = $conn->prepare("INSERT INTO carrito (id_usuario, id_producto, cantidad) 
-                                VALUES (?, ?, ?) 
-                                ON DUPLICATE KEY UPDATE cantidad = cantidad + ?");
-        $stmt->bind_param("iiii", $user_id, $product_id, $quantity, $quantity);
+        // Verificar si el producto ya está en el carrito
+        $stmt = $conn->prepare("SELECT cantidad FROM carrito WHERE id_usuario = ? AND id_producto = ?");
+        $stmt->bind_param("ii", $user_id, $product_id);
         $stmt->execute();
-        $stmt->close();
+        $result = $stmt->get_result();
 
-        // Mostrar mensaje de éxito
-        $success_message = "The product " . htmlspecialchars($product['nombre']) . " was added to the cart!";
+        if ($result->num_rows > 0) {
+            // Producto ya existe, actualizar cantidad
+            $cart_item = $result->fetch_assoc();
+            $new_quantity = $cart_item['cantidad'] + $quantity;
+
+            // Verificar stock disponible
+            $stmt = $conn->prepare("SELECT cantidad_almacen FROM productos WHERE id = ?");
+            $stmt->bind_param("i", $product_id);
+            $stmt->execute();
+            $product_result = $stmt->get_result();
+            $product = $product_result->fetch_assoc();
+            $stmt->close();
+
+            if ($new_quantity > $product['cantidad_almacen']) {
+                $error_message = "Only {$product['cantidad_almacen']} units are available for this product.";
+            } else {
+                $stmt = $conn->prepare("UPDATE carrito SET cantidad = ? WHERE id_usuario = ? AND id_producto = ?");
+                $stmt->bind_param("iii", $new_quantity, $user_id, $product_id);
+                $stmt->execute();
+                $stmt->close();
+
+                $success_message = "The product quantity has been updated in your cart.";
+            }
+        } else {
+            // Producto no existe en el carrito, agregarlo
+            $stmt = $conn->prepare("INSERT INTO carrito (id_usuario, id_producto, cantidad) VALUES (?, ?, ?)");
+            $stmt->bind_param("iii", $user_id, $product_id, $quantity);
+            $stmt->execute();
+            $stmt->close();
+
+            $success_message = "The product has been added to your cart.";
+        }
     }
 }
+
 
 // Obtener los datos del producto seleccionado
 if (isset($_GET['id'])) {
