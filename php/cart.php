@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Verificar si el usuario está logueado
+// Verificar si el usuario tiene una sesión abierta
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -117,8 +117,8 @@ $stmt->close();
                     <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User'; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -146,7 +146,7 @@ $stmt->close();
     <!-- Cart Section -->
     <div class="container py-5">
         <h2 class="mb-4">My Shopping Bag</h2>
-
+        <!-- isset() verifica si una variable ya ha sido declarada y no es nula.  -->
         <?php if (isset($success_message)): ?>
             <div class="alert alert-success alert-dismissible fade show">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -219,6 +219,7 @@ $stmt->close();
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
