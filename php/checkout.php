@@ -33,34 +33,63 @@ $cart_query->close();
 
 // Calcular el total del carrito
 $total_price = 0;
+$cart_products = [];
 foreach ($cart_items as $item) {
-    $product_query = $conn->prepare("SELECT precio FROM productos WHERE id = ?");
+    $product_query = $conn->prepare("SELECT precio, cantidad_almacen FROM productos WHERE id = ?");
     $product_query->bind_param("i", $item['id_producto']);
     $product_query->execute();
     $product_data = $product_query->get_result()->fetch_assoc();
     $total_price += $product_data['precio'] * $item['cantidad'];
+    $cart_products[] = [
+        'id_producto' => $item['id_producto'],
+        'cantidad' => $item['cantidad'],
+        'cantidad_almacen' => $product_data['cantidad_almacen']
+    ];
     $product_query->close();
 }
 
 // Procesar el pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
-    // Insertar productos en historial
-    foreach ($cart_items as $item) {
-        $insert_historial = $conn->prepare("INSERT INTO historial (id_usuario, id_producto) VALUES (?, ?)");
-        $insert_historial->bind_param("ii", $user_id, $item['id_producto']);
-        $insert_historial->execute();
-        $insert_historial->close();
+    // Iniciar una transacción
+    $conn->begin_transaction();
+
+    try {
+        // Insertar productos en historial y actualizar el stock
+        foreach ($cart_products as $product) {
+            // Insertar en historial
+            $insert_historial = $conn->prepare("INSERT INTO historial (id_usuario, id_producto) VALUES (?, ?)");
+            $insert_historial->bind_param("ii", $user_id, $product['id_producto']);
+            $insert_historial->execute();
+            $insert_historial->close();
+
+            // Restar la cantidad comprada del stock
+            $new_stock = $product['cantidad_almacen'] - $product['cantidad'];
+            if ($new_stock < 0) {
+                throw new Exception("Insufficient stock for product ID: " . $product['id_producto']);
+            }
+            $update_stock = $conn->prepare("UPDATE productos SET cantidad_almacen = ? WHERE id = ?");
+            $update_stock->bind_param("ii", $new_stock, $product['id_producto']);
+            $update_stock->execute();
+            $update_stock->close();
+        }
+
+        // Vaciar el carrito
+        $clear_cart = $conn->prepare("DELETE FROM carrito WHERE id_usuario = ?");
+        $clear_cart->bind_param("i", $user_id);
+        $clear_cart->execute();
+        $clear_cart->close();
+
+        // Confirmar la transacción
+        $conn->commit();
+
+        // Redirigir a una página de confirmación
+        header("Location: confirmation.php");
+        exit();
+    } catch (Exception $e) {
+        // Revertir la transacción en caso de error
+        $conn->rollback();
+        $error_message = "An error occurred while processing your order. Please try again.";
     }
-
-    // Vaciar el carrito
-    $clear_cart = $conn->prepare("DELETE FROM carrito WHERE id_usuario = ?");
-    $clear_cart->bind_param("i", $user_id);
-    $clear_cart->execute();
-    $clear_cart->close();
-
-    // Redirigir a una página de confirmación
-    header("Location: confirmation.php");
-    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -115,6 +144,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     <!-- Checkout Section -->
     <div class="container py-5">
         <h3 class="text-center">Checkout</h3>
+        <?php if (isset($error_message)): ?>
+            <div class="alert alert-danger">
+                <?php echo $error_message; ?>
+            </div>
+        <?php endif; ?>
         <form class="mt-4" method="POST" action="">
             <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
