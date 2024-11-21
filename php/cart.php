@@ -203,7 +203,11 @@ $stmt->close();
                         <strong>Estimated Total</strong>
                         <strong>$<?php echo number_format($totalPrice + 65, 2); ?></strong>
                     </div>
-                    <a href="checkout.php" class="btn btn-custom btn-lg w-100">Checkout</a>
+                    <?php if (count($cart_items) > 0): ?>
+                        <a href="checkout.php" class="btn btn-custom btn-lg w-100">Checkout</a>
+                    <?php else: ?>
+                        <div class="btn btn-secondary btn-lg w-100 disabled">Checkout</div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

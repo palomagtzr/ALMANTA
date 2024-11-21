@@ -1,5 +1,67 @@
 <?php
 session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Conexión a la base de datos
+$conn = mysqli_connect("localhost", "root", "", "tienda");
+
+// Validar la conexión
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+}
+
+// Obtener información del usuario
+$user_id = $_SESSION['user_id'];
+$user_query = $conn->prepare("SELECT nombre, correo, direccion_postal, num_tarjeta_bancaria FROM usuarios WHERE id = ?");
+$user_query->bind_param("i", $user_id);
+$user_query->execute();
+$user_info = $user_query->get_result()->fetch_assoc();
+$user_query->close();
+
+// Obtener productos del carrito
+$cart_query = $conn->prepare("SELECT id_producto, cantidad FROM carrito WHERE id_usuario = ?");
+$cart_query->bind_param("i", $user_id);
+$cart_query->execute();
+$cart_items = $cart_query->get_result();
+$cart_query->close();
+
+// Calcular el total del carrito
+$total_price = 0;
+foreach ($cart_items as $item) {
+    $product_query = $conn->prepare("SELECT precio FROM productos WHERE id = ?");
+    $product_query->bind_param("i", $item['id_producto']);
+    $product_query->execute();
+    $product_data = $product_query->get_result()->fetch_assoc();
+    $total_price += $product_data['precio'] * $item['cantidad'];
+    $product_query->close();
+}
+
+// Procesar el pedido
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
+    // Insertar productos en historial
+    foreach ($cart_items as $item) {
+        $insert_historial = $conn->prepare("INSERT INTO historial (id_usuario, id_producto) VALUES (?, ?)");
+        $insert_historial->bind_param("ii", $user_id, $item['id_producto']);
+        $insert_historial->execute();
+        $insert_historial->close();
+    }
+
+    // Vaciar el carrito
+    $clear_cart = $conn->prepare("DELETE FROM carrito WHERE id_usuario = ?");
+    $clear_cart->bind_param("i", $user_id);
+    $clear_cart->execute();
+    $clear_cart->close();
+
+    // Redirigir a una página de confirmación
+    header("Location: confirmation.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,22 +111,38 @@ session_start();
             </div>
         </div>
     </nav>
+
+    <!-- Checkout Section -->
     <div class="container py-5">
         <h3 class="text-center">Checkout</h3>
-        <form class="mt-4">
+        <form class="mt-4" method="POST" action="">
             <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" id="name"
+                    value="<?php echo htmlspecialchars($user_info['nombre']); ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" class="form-control" id="email"
+                    value="<?php echo htmlspecialchars($user_info['correo']); ?>" readonly>
             </div>
             <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address">
+                <label for="address" class="form-label">Shipping Address</label>
+                <input type="text" class="form-control" id="address"
+                    value="<?php echo htmlspecialchars($user_info['direccion_postal']); ?>" readonly>
             </div>
-            <button type="submit" class="btn btn-custom">Place Order</button>
+            <div class="mb-3">
+                <label for="billing" class="form-label">Billing Information</label>
+                <input type="text" class="form-control" id="billing"
+                    value="<?php echo htmlspecialchars($user_info['num_tarjeta_bancaria']); ?>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="total" class="form-label">Total</label>
+                <input type="text" class="form-control" id="total"
+                    value="$<?php echo number_format($total_price + 65); ?> MXN" readonly>
+            </div>
+            <p>By placing your order, you confirm that your personal and shipping information is correct.</p>
+            <button type="submit" name="place_order" class="btn btn-secondary w-100">Place Order</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

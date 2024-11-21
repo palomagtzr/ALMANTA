@@ -140,6 +140,29 @@ html {
 }
 
 .text-center a:hover {
-    color: #606c38 !important;
-    text-decoration: underline;
+    color: white !important;
+}
+
+.thank-you-card {
+    background-color: #ffffff;
+    border: 2px solid #606c38;
+    border-radius: 10px;
+}
+
+.thank-you-title {
+    color: #606c38;
+}
+
+.thank-you-text {
+    color: #6c757d;
+}
+
+.btn-theme {
+    background-color: #606c38;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-theme:hover {
+    background-color: #55632f;
 }

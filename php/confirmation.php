@@ -1,37 +1,16 @@
 <?php
-// Conexión a la base de datos
-$con = mysqli_connect("localhost", "root", "", "tienda");
-
-// Validar la conexión
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    exit();
-}
-
-// Obtener datos del formulario
-$name = $_POST["name"];
-$email = $_POST["email"];
-$password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash de la contraseña
-$birthdate = $_POST["birthdate"];
-$card_number = $_POST["card_number"];
-$postal_address = $_POST["postal_address"];
-
-// Inserción de datos
-$action = "INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contraseña`, `fecha_nacimiento`, `num_tarjeta_bancaria`, `direccion_postal`) 
-           VALUES (NULL, '$name', '$email', '$password', '$birthdate', '$card_number', '$postal_address')";
-
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>ALMANTA - Thank You</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../img/ALMANTA_logo.png" type="image/png">
-    <title>ALMANTA - User created</title>
 </head>
 
 <body>
@@ -71,24 +50,21 @@ $action = "INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contraseña`, `fec
         </div>
     </nav>
 
-    <div class="container pt-5 text-center">
-        <?php
-        // Ejecución de la consulta e impresión de mensaje
-        if (mysqli_query($con, $action)) {
-            echo '<h1 class="display-4 text-secondary">¡Thank you for signing up, ' . htmlspecialchars($name) . '!</h1>';
-        } else {
-            echo '<h1 class="display-5 text-danger">Error en el registro</h1>';
-            echo "<p>Error: " . mysqli_error($con) . "</p>";
-        }
-
-        // Cerrar la conexión
-        mysqli_close($con);
-        ?>
-
-        <a href="../index.php" class="btn btn-custom mt-4 text-white">Back to menu</a>
+    <!-- Confirmation Section -->
+    <div class="container py-5 text-center">
+        <div class="thank-you-card card shadow-lg p-5 mx-auto" style="max-width: 600px;">
+            <img src="../img/thank_you.png" alt="Thank You" class="img-fluid mb-4 mx-auto d-block"
+                style="max-width: 250px;">
+            <h1 class="thank-you-title mb-4">Thank You for Your Purchase!</h1>
+            <p class="thank-you-text mb-4">
+                We appreciate your trust in ALMANTA. Your order has been placed successfully. You will receive an email
+                with your order details shortly.
+            </p>
+            <a href="../index.php" class="btn btn-theme btn-lg">Return to Home</a>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
