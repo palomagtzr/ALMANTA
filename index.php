@@ -37,13 +37,20 @@ session_start();
                             <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User'; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <li><a class="dropdown-item" href="php/profile.php">Profile</a></li>
-                                <li><a class="dropdown-item" href="php/logout.php">Log out</a></li>
-                            <?php else: ?>
+                            <?php
+                            if (isset($_SESSION['user_id'])) {
+                                if ($_SESSION['user_id'] == 1) { ?>
+                                    <li><a class="dropdown-item" href="php/admin.php">Admin page</a></li>
+                                    <li><a class="dropdown-item" href="php/profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="php/logout.php">Log out</a></li>
+                                <?php } else { ?>
+                                    <li><a class="dropdown-item" href="php/profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="php/logout.php">Log out</a></li>
+                                <?php }
+                            } else { ?>
                                 <li><a class="dropdown-item" href="php/register.php">Register</a></li>
                                 <li><a class="dropdown-item" href="php/login.php">Log in</a></li>
-                            <?php endif; ?>
+                            <?php } ?>
                         </ul>
                     </li>
                 </ul>

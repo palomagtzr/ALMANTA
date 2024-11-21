@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Verificar si el usuario es administrador
+if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
+    header("Location: ../index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,10 +13,37 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create User - ALMANTA</title>
+    <title>ALMANTA - Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../img/ALMANTA_logo.png" type="image/png">
+    <style>
+        .admin-header {
+            background-color: #343a40;
+            /* Dark theme color */
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-buttons .btn {
+            background-color: #6c757d;
+            /* Secondary theme color */
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .admin-buttons .btn:hover {
+            background-color: #495057;
+            /* Darker secondary theme */
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 
 <body>
@@ -57,60 +90,18 @@ session_start();
         </div>
     </nav>
 
-    <!-- User Creation Form -->
-    <div class="container py-5">
-        <h2 class="text-center mb-4">Create New User</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <!-- Formulario corregido -->
-                        <form action="register-php.php" method="post">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">User Name</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Enter your name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Enter your email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Enter your password" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="birthdate" class="form-label">Date of Birth</label>
-                                <input type="date" class="form-control" id="birthdate" name="birthdate" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="card_number" class="form-label">Bank Card Number</label>
-                                <input type="text" class="form-control" id="card_number" name="card_number"
-                                    placeholder="Enter your card number" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="postal_address" class="form-label">Postal Address</label>
-                                <input type="text" class="form-control" id="postal_address" name="postal_address"
-                                    placeholder="Enter your postal address" required>
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-custom">Create Account</button>
-                            </div>
-                        </form>
-                        <!-- Fin del formulario corregido -->
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <h1>Welcome to the Admin Panel</h1>
+        <p>Manage the inventory, view purchase history, and return to the main menu.</p>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer py-4 text-center">
-        <p>&copy; 2024 ALMANTA. All rights reserved. | <a href="" style="color: white;">Privacy
-                Policy</a></p>
-    </footer>
+    <!-- Buttons Section -->
+    <div class="container text-center admin-buttons">
+        <a href="inventory.php" class="btn btn-lg">Productos en Inventario</a>
+        <a href="purchase_history.php" class="btn btn-lg">Historial de Compras</a>
+        <a href="../index.php" class="btn btn-lg">Regresar al Menú</a>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

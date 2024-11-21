@@ -26,32 +26,39 @@ if (mysqli_connect_errno()) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a href="../index.php" class="navbar-brand">
-                <img src="../img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
+            <a href="index.php" class="navbar-brand">
+                <img src="img/ALMANTA_logo2.png" alt="Almanta Logo" class="logo" width="300">
             </a>
-            <a class="navbar-brand" href="../index.php">Menu</a>
+            <a class="navbar-brand" href="index.php">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="php/catalog.php">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="php/cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="php/contact.php">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User'; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                                <li><a class="dropdown-item" href="logout.php">Log out</a></li>
-                            <?php else: ?>
-                                <li><a class="dropdown-item" href="register.php">Register</a></li>
-                                <li><a class="dropdown-item" href="login.php">Log in</a></li>
-                            <?php endif; ?>
+                            <?php
+                            if (isset($_SESSION['user_id'])) {
+                                if ($_SESSION['user_id'] == 1) { ?>
+                                    <li><a class="dropdown-item" href="php/admin.php">Admin page</a></li>
+                                    <li><a class="dropdown-item" href="php/profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="php/logout.php">Log out</a></li>
+                                <?php } else { ?>
+                                    <li><a class="dropdown-item" href="php/profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="php/logout.php">Log out</a></li>
+                                <?php }
+                            } else { ?>
+                                <li><a class="dropdown-item" href="php/register.php">Register</a></li>
+                                <li><a class="dropdown-item" href="php/login.php">Log in</a></li>
+                            <?php } ?>
                         </ul>
                     </li>
                 </ul>
