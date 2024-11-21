@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     try {
         // Insertar productos en historial y actualizar el stock
         foreach ($cart_products as $product) {
-            // Insertar en historial
-            $insert_historial = $conn->prepare("INSERT INTO historial (id_usuario, id_producto) VALUES (?, ?)");
-            $insert_historial->bind_param("ii", $user_id, $product['id_producto']);
+            // Insertar en historial con la cantidad
+            $insert_historial = $conn->prepare("INSERT INTO historial (id_usuario, id_producto, cantidad) VALUES (?, ?, ?)");
+            $insert_historial->bind_param("iii", $user_id, $product['id_producto'], $product['cantidad']);
             $insert_historial->execute();
             $insert_historial->close();
 
