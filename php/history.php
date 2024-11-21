@@ -138,6 +138,28 @@ $result = mysqli_query($con, $sql);
                     <li class="nav-item"><a class="nav-link" href="catalog.php">Catalog</a></li>
                     <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'User'; ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <?php
+                            if (isset($_SESSION['user_id'])) {
+                                if ($_SESSION['user_id'] == 1) { ?>
+                                    <li><a class="dropdown-item" href="admin.php">Admin page</a></li>
+                                    <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="logout.php">Log out</a></li>
+                                <?php } else { ?>
+                                    <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="logout.php">Log out</a></li>
+                                <?php }
+                            } else { ?>
+                                <li><a class="dropdown-item" href="register.php">Register</a></li>
+                                <li><a class="dropdown-item" href="login.php">Log in</a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
