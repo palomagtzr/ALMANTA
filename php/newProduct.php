@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="mb-3">
                 <label for="seccion" class="form-label">Section</label>
-                <select class="form-select" id="seccion" name="Enter section" required>
+                <select class="form-select" id="seccion" name="seccion" required>
                     <option value="Desierto">Desierto</option>
                     <option value="Agua">Agua</option>
                     <option value="Sombra">Sombra</option>
