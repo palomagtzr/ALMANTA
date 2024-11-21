@@ -31,6 +31,43 @@ if ($result && mysqli_num_rows($result) == 1) {
     exit();
 }
 
+// Variables de paginación
+$limit = 10; // Número de registros por página
+$page = isset($_GET['page']) ? $_GET['page'] : 1; // Página actual
+$offset = ($page - 1) * $limit;
+
+
+// Query para contar total de registros (considerando el filtro)
+$total_query = "SELECT COUNT(*) AS total FROM historial";
+if ($user_filter) {
+    $total_query .= " WHERE id_usuario = $user_id";
+}
+$total_result = mysqli_query($con, $total_query);
+$total_rows = mysqli_fetch_assoc($total_result)['total'];
+$total_pages = ceil($total_rows / $limit);
+
+// Query para obtener los registros paginados
+$sql = "SELECT 
+    historial.id_compra AS Purchase_ID,
+    historial.id_usuario AS User_ID,
+    usuarios.nombre AS User_Name,
+    productos.nombre AS Product_Name,
+    historial.cantidad AS Quantity
+FROM 
+    historial
+JOIN 
+    usuarios ON historial.id_usuario = usuarios.id
+JOIN 
+    productos ON historial.id_producto = productos.id";
+
+// Agregar filtro por usuario si está definido
+if ($user_id) {
+    $sql .= " WHERE historial.id_usuario = $user_id";
+}
+
+$sql .= " ORDER BY historial.id_compra ASC LIMIT $limit OFFSET $offset";
+$result = mysqli_query($con, $sql);
+
 mysqli_close($con);
 ?>
 
@@ -44,6 +81,50 @@ mysqli_close($con);
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="icon" href="../img/ALMANTA_logo.png" type="image/png">
+        <style>
+            .table-container {
+                margin-top: 3rem;
+                padding: 1rem;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                max-width: 90%;
+                /* Limitar el ancho máximo */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .table thead {
+                background-color: #495057;
+                color: white;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            .table th,
+            .table td {
+                text-align: center;
+                vertical-align: middle;
+                padding: 0.75rem;
+                /* Espaciado interno */
+            }
+
+            .pagination {
+                justify-content: center;
+            }
+
+            .pagination .page-link {
+                color: #495057;
+            }
+
+            .pagination .page-item.active .page-link {
+                background-color: #6c757d;
+                border-color: #6c757d;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -110,6 +191,48 @@ mysqli_close($con);
                     </div>
                 </div>
             </div>
+            <br>
+        </div>
+        <h2 class="display-4 text-center mb-4">USER PURCHASES</h2>
+        <div class="container table-container">
+            <!-- Tabla -->
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Purchase ID</th>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['Purchase_ID']); ?></td>
+                            <td><?php echo htmlspecialchars($row['User_ID']); ?></td>
+                            <td><?php echo htmlspecialchars($row['User_Name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['Product_Name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['Quantity']); ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginación -->
+        <nav>
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                        <a class="page-link"
+                            href="?page=<?php echo $i; ?>&user_id=<?php echo htmlspecialchars($user_id); ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    </li>
+                <?php endfor; ?>
+            </ul>
+        </nav>
         </div>
 
         <!-- Footer -->
